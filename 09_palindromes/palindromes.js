@@ -1,5 +1,6 @@
 const { truncate } = require("fs/promises");
 
+const regex = /[\W_]/g;
 /**
  * Splices string and checks for palindrome using for loop
  * @param {string} string to be spliced
@@ -7,7 +8,7 @@ const { truncate } = require("fs/promises");
  */
 const palindromesForLoop = function (string) {
     // Need to splice out white spaces and puncutation.  Covert all letters to same casing. 
-    const str = string.replace(/[^a-zA-Z0-9]+/g, '').toLowerCase();
+    const str = string.replace(regex, '').toLowerCase();
 
     for(let i = 0; i < str.length/2; i++){
         if(str[i] != str[str.length - 1 - i])
@@ -22,7 +23,6 @@ const palindromesForLoop = function (string) {
  * @returns true or false
  */
 const palindromes = function(string){
-    const regex = /[\W_]/g;
     const regStr = string.toLowerCase().replace(regex, '');
     const reverseStr = regStr.split('').reverse().join('');
     return regStr === reverseStr;
